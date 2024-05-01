@@ -12,21 +12,23 @@ public class Giocatore {
 		this.cfu = CFU_INIZIALI;
 		this.borsa = new Borsa();
 	}
-	
+
 	public Borsa getBorsa() {
 		return borsa;
 	}
-	
+
+	public void setBorsa(Borsa borsa) {
+		this.borsa = borsa;
+	}
+
 	public int getCfu() {
-		return this.cfu;
+		return cfu;
+	}
+
+	public void setCfu(int cfu) {
+		this.cfu = cfu;
 	}
 	
-	public Borsa setBorsa(Borsa borsa) {
-		return this.borsa = borsa;
-	}
 	
-	public int setCfu(int cfu) {
-		return this.cfu = cfu;
-	}
 	
 }
