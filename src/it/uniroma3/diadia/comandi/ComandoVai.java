@@ -4,11 +4,12 @@ import it.uniroma3.diadia.giocatore.*;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.*;
 import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 
 public class ComandoVai implements Comando {
 	private String direzione;
 	private final static String NOME = "vai";
-	private IO io;
+	private IO io = new IOConsole();
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore

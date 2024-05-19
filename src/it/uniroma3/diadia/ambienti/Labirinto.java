@@ -43,6 +43,10 @@ public class Labirinto {
         this.stanzaCorrente = atrio;  
 		stanzaVincente = biblioteca;
     }
+    
+    public static LabirintoBuilder newBuilder() {
+		return new LabirintoBuilder();
+	}
 
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;
@@ -56,5 +60,8 @@ public class Labirinto {
 		this.stanzaCorrente = stanzaCorrente;
 	}
 
+	public void setStanzaVincente(Stanza stanzaVincente) {
+		this.stanzaVincente = stanzaVincente;
+	}
 	
 }

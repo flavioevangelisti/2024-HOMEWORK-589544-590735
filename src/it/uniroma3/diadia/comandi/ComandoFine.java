@@ -2,16 +2,18 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 
 public class ComandoFine implements Comando {
 	private final static String NOME = "fine";
-	private IO io;
+	public final static String MESSAGGIO_FINE = "Grazie di aver giocato!";
+	private IO io = new IOConsole();
 	/**
 	 * Comando "Fine".
 	 */
 	@Override
 	public void esegui(Partita partita) {
-		io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+		io.mostraMessaggio(MESSAGGIO_FINE);  // si desidera smettere
 	}
 	
 	@Override

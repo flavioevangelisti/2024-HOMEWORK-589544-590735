@@ -1,7 +1,7 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
-
+import it.uniroma3.diadia.ambienti.*;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -17,7 +17,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 public class DiaDia {
 
-	static final private String MESSAGGIO_BENVENUTO = ""+
+	public static final String MESSAGGIO_BENVENUTO = ""+
 			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
 			"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
 			"I locali sono popolati da strani personaggi, " +
@@ -30,8 +30,8 @@ public class DiaDia {
 	private Partita partita;
 	private IO con;
 
-	public DiaDia(IO console) {
-		this.partita = new Partita();
+	public DiaDia(IO console, Labirinto labirinto) {
+		this.partita = new Partita(labirinto);
 		this.con = console;
 	}
 
@@ -56,7 +56,7 @@ public class DiaDia {
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
-			con.mostraMessaggio(istruzione);
+			con.mostraMessaggio("Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
 			con.mostraMessaggio("Hai esaurito i CFU...");
 		return this.partita.isFinita();
@@ -64,7 +64,12 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO console= new IOConsole();
-		DiaDia gioco = new DiaDia(console);
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
+				.getLabirinto();
+		DiaDia gioco = new DiaDia(console, labirinto);
 		gioco.gioca();
 	}
 }

@@ -2,10 +2,11 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 
 public class ComandoGuarda implements Comando {
 	private final static String NOME = "guarda";
-	private IO io;
+	private IO io = new IOConsole();
 	/**
 	 * Stampa la stanza corrente e lo stato della partita.
 	 */
