@@ -1,20 +1,32 @@
 package it.uniroma3.diadia.test;
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.io.FileNotFoundException;
+
+import org.junit.Before;
 import org.junit.Test;
 
 public class PartitaTest {
-
-	Partita p = new Partita();
-	Stanza s = new Stanza("Stanza");
+	Labirinto labirinto;
+	Partita p;
+	Stanza s;
+	
+	@Before
+	public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
+		 labirinto = Labirinto.newBuilder("labirinto.txt").getLabirinto();
+		 p = new Partita(labirinto);
+		 s = new Stanza("Stanza");
+	}
 	
 	@Test
 	
 	public void testGetStanzaVincente() {
-		assertEquals("Biblioteca", p.getLabirinto().getStanzaVincente().getNome());
+		assertEquals("N11", p.getLabirinto().getStanzaVincente().getNome());
 	}
 
 	@Test

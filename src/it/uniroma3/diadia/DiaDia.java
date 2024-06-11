@@ -1,6 +1,10 @@
 package it.uniroma3.diadia;
+
 import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
+
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.*;
 
 /**
@@ -51,7 +55,7 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica(con);
+		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva(this.con);
 				
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
@@ -62,14 +66,12 @@ public class DiaDia {
 		return this.partita.isFinita();
 		}
 
-	public static void main(String[] argc) {
-		IO console= new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-				.addStanzaIniziale("LabCampusOne")
-				.addStanzaVincente("Biblioteca")
-				.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
-				.getLabirinto();
+	public static void main(String[] argc) throws Exception {
+		Scanner scannerDiLinee = new Scanner(System.in);
+		IO console= new IOConsole(scannerDiLinee);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto4.txt").getLabirinto();
 		DiaDia gioco = new DiaDia(console, labirinto);
 		gioco.gioca();
+		scannerDiLinee.close();
 	}
 }

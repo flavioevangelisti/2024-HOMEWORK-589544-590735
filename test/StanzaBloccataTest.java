@@ -17,10 +17,10 @@ public class StanzaBloccataTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		sb = new StanzaBloccata("StanzaBloccata", "ovest", "grimaldello");
+		sb = new StanzaBloccata("StanzaBloccata", Direzione.ovest, "grimaldello");
 		s = new Stanza("Stanzetta");
 		a = new Attrezzo("grimaldello", 1);
-		sb.impostaStanzaAdiacente("ovest", s);
+		sb.impostaStanzaAdiacente(Direzione.ovest, s);
 		
 	}
 
@@ -30,13 +30,13 @@ public class StanzaBloccataTest {
 
 	@Test
 	public void testGetStanzaAdiacenteDirezioneBloccata() {
-		assertEquals(sb, sb.getStanzaAdiacente("ovest"));
+		assertEquals(sb, sb.getStanzaAdiacente(Direzione.ovest));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteDirezioneSbloccata() {
 		sb.addAttrezzo(a);
-		assertEquals(s, sb.getStanzaAdiacente("ovest"));
+		assertEquals(s, sb.getStanzaAdiacente(Direzione.ovest));
 		
 	}
 

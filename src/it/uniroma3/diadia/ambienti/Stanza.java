@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 import java.util.*;
 
@@ -17,8 +18,9 @@ import java.util.*;
 public class Stanza {
 	
 	private String nome;
+	private AbstractPersonaggio personaggio;
 	private Map<String, Attrezzo> attrezzi;
-	private Map<String,Stanza> stanzeAdiacenti;
+	private Map<Direzione,Stanza> stanzeAdiacenti;
     
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -36,7 +38,7 @@ public class Stanza {
      * @param direzione direzione in cui sara' posta la stanza adiacente.
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
-    public void impostaStanzaAdiacente(String direzione, Stanza stanzaAdiacente) {
+    public void impostaStanzaAdiacente(Direzione direzione, Stanza stanzaAdiacente) {
     	this.stanzeAdiacenti.put(direzione,stanzaAdiacente);
     }
 
@@ -44,7 +46,7 @@ public class Stanza {
      * Restituisce la stanza adiacente nella direzione specificata
      * @param direzione
      */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -68,8 +70,8 @@ public class Stanza {
      * Restituisce la collezione di attrezzi presenti nella stanza.
      * @return la collezione di attrezzi nella stanza.
      */
-    public Map<String, Attrezzo> getAttrezzi() {
-        return (Map<String, Attrezzo>) attrezzi;
+    public List<Attrezzo> getAttrezzi() {
+        return new ArrayList<> (this.attrezzi.values());
     }
 
     /**
@@ -120,6 +122,17 @@ public class Stanza {
 			attrezzoCercato = this.attrezzi.get(nomeAttrezzo);
 		return attrezzoCercato;		
 	}
+	
+	public int numeroAttrezzi() {
+		int num = 0;
+		Collection<Attrezzo> att = this.attrezzi.values();
+		Iterator<Attrezzo> i = att.iterator();
+		while(i.hasNext()) {
+			num++;
+			i.next();
+		}
+		return num;
+	}
 
 	/**
 	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
@@ -136,8 +149,33 @@ public class Stanza {
 	}
 
 
-	public Set<String> getDirezioni() {
-		return this.stanzeAdiacenti.keySet();
+	public List<Direzione> getDirezioni() {
+		return new ArrayList<>(this.stanzeAdiacenti.keySet());
     }
+
+	public List<Stanza> getStanzeAdiacenti() {
+		List<Stanza> listaStanzeAdiacenti = new ArrayList<>();
+		for (Stanza s : stanzeAdiacenti.values()) {
+			listaStanzeAdiacenti.add(s);
+		}
+		return listaStanzeAdiacenti;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return personaggio;
+	}
+
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Stanza that = (Stanza)obj;
+		return this.getNome().equals(that.getNome());
+	}
+	
+	
+	
 
 }

@@ -7,17 +7,27 @@ public class IOSimulator implements IO {
 	
 	private List<String> righeLette;
 	private int indiceRigheLette;
+
+	public List<String> getMessaggiProdotti() {
+		return messaggiProdotti;
+	}
+
+	public void setMessaggiProdotti(List<String> messaggiProdotti) {
+		this.messaggiProdotti = messaggiProdotti;
+	}
+
+	//forse si potrebbe inserire una mappa al posto della lista per ricordare ogni riga letta quale messaggi abbia prodotto
 	private List<String> messaggiProdotti;
 	private int indiceMessaggiProdotti;
 	private int indiceMessaggiMostrati;
-	
+
 	public IOSimulator(List<String> righeDaLeggere) {
 		this.righeLette = righeDaLeggere;
 		this.indiceRigheLette = 0;
 		this.indiceMessaggiMostrati = 0;
 		this.messaggiProdotti = new ArrayList<String>();
 	}
-	
+
 	@Override
 	public String leggiRiga() {
 		String riga = null;
@@ -26,13 +36,13 @@ public class IOSimulator implements IO {
 		this.indiceRigheLette++;
 		return riga;
 	}
-	
+
 	@Override
 	public void mostraMessaggio(String msg) {
 		this.messaggiProdotti.add(this.indiceMessaggiProdotti, msg);
 		this.indiceMessaggiProdotti++;
 	}
-	
+
 	public String nextMessaggio() {
 		String next = this.messaggiProdotti.get(indiceMessaggiMostrati);
 		this.indiceMessaggiMostrati++;
@@ -42,4 +52,5 @@ public class IOSimulator implements IO {
 	public boolean hasNextMessaggio() {
 		return this.indiceMessaggiMostrati < this.indiceMessaggiProdotti;
 	}
+
 }

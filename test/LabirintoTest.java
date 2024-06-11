@@ -1,6 +1,9 @@
 package it.uniroma3.diadia.test;
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.*;
 import static org.junit.Assert.assertEquals;
+
+import java.io.FileNotFoundException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,35 +11,35 @@ import org.junit.Test;
 public class LabirintoTest {
 	Labirinto lab;
 	Stanza biblioteca;
-	Stanza s;
+	Stanza DS1;
 
 	@Before
 	
-	public void setUp() {
-		lab = new Labirinto();
-		lab.creaStanze();
+	public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
+		lab = Labirinto.newBuilder("labirinto.txt").getLabirinto();
+		
 		biblioteca = new Stanza("Biblioteca");
-		s = new Stanza("s");
+		DS1 = new Stanza("DS1");
 	}
 
 
 	@Test
 	
 	public void testGetStanzaVincente() {
-		assertEquals("Biblioteca", lab.getStanzaVincente().getNome());
+		assertEquals("N11", lab.getStanzaVincente().getNome());
 	}
 
 
 	@Test
 	
 	public void testSetStanzaCorrente() {
-		lab.setStanzaCorrente(s);
-		assertEquals(s, lab.getStanzaCorrente());
+		lab.setStanzaCorrente(DS1);
+		assertEquals(DS1, lab.getStanzaCorrente());
 	}
 	@Test
 	
 	public void testGetStanzaCorrente() {
-		assertEquals("Atrio", lab.getStanzaCorrente().getNome());
+		assertEquals("N10", lab.getStanzaCorrente().getNome());
 	}
 
 }

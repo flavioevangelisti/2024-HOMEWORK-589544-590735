@@ -1,0 +1,11 @@
+Stanze:Atrio,Biblioteca,N11,N10
+Magica:
+Buia:
+Bloccata:
+Inizio:Atrio
+Vincente:Biblioteca
+Mago:
+Cane:
+Strega:
+Attrezzi:martello 3 Atrio
+Uscite:Atrio nord Biblioteca, Biblioteca sud Atrio, N11 ovest Atrio, Atrio est N11, N10 est Atrio, Atrio ovest N10

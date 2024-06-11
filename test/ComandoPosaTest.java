@@ -5,11 +5,14 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Scanner;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.*;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.*;
 
 
@@ -19,13 +22,15 @@ public class ComandoPosaTest {
 	private Attrezzo attrezzo;
 	private IO io;
 	private Comando comando;
+	Labirinto labirinto;
 
 	@Before
 	public void setUp() throws Exception {
-		partita = new Partita();
+		labirinto = Labirinto.newBuilder("labirinto.txt").getLabirinto();
+		partita = new Partita(labirinto);
 		attrezzo = new Attrezzo("martello", 2);
 		comando = new ComandoPosa();
-		io = new IOConsole();
+		io = new IOConsole(new Scanner(System.in));
 		comando.setIo(io);
 	}
 
@@ -43,22 +48,6 @@ public class ComandoPosaTest {
 
 	@Test
 	public void testAttrezzoPosatoNull() {
-		comando.setParametro("martello");
-		comando.esegui(partita);
-		assertFalse(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("martello"));
-	}
-
-
-	public void creatoreAttrezzi() {
-		for(int i= 0; i<10;i++) {
-			partita.getLabirinto().getStanzaCorrente().addAttrezzo(new Attrezzo("utensile"+i, 1));
-		}
-	}
-	
-	@Test
-	public void testTroppiAttrezzi() {
-		this.creatoreAttrezzi();
-		partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 		comando.setParametro("martello");
 		comando.esegui(partita);
 		assertFalse(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("martello"));

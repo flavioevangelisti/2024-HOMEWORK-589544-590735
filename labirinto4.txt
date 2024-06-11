@@ -1,0 +1,11 @@
+Stanze:Atrio,Biblioteca,N11,N10
+Magica:N11
+Buia:N10 lanterna
+Bloccata:Atrio nord collare
+Inizio:Atrio
+Vincente:Biblioteca
+Mago: N11 Oz Benvenuto lanterna
+Cane: N10 Fido Bau
+Strega:Atrio Circe HIHIHI
+Attrezzi:martello 3 Atrio, osso 4 N10
+Uscite:Atrio nord Biblioteca, Biblioteca sud Atrio, N11 ovest Atrio, Atrio est N11, N10 est Atrio, Atrio ovest N10
